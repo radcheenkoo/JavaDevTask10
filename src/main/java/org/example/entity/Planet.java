@@ -3,11 +3,10 @@ package org.example.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 
 
 @Entity
-@NoArgsConstructor
+
 @Table(name = "planet")
 public class Planet {
     @Id

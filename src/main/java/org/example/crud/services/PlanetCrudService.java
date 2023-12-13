@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PlanetCrudService{
 
-    private Session session = HibernateUtil.getInstance().getSessionFactory1().openSession();
+    private Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 
 
     public boolean create(Planet planet) {

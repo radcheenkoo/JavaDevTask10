@@ -16,7 +16,6 @@ public class HibernateUtil {
 
     @Getter
     private SessionFactory sessionFactory;
-    private SessionFactory sessionFactory1;
 
     static {
         INSTANCE = new HibernateUtil();
@@ -35,19 +34,8 @@ public class HibernateUtil {
                     .setProperty("hibernate.show_sql", "true")
                     .setProperty("hibernate.hbm2ddl.auto", "update")
                     .addAnnotatedClass(Client.class)
+                    .addAnnotatedClass(Planet.class)
                     .buildSessionFactory();
-
-
-        this.sessionFactory1 = new Configuration()
-                .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
-                .setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5433/postgres")
-                .setProperty("hibernate.connection.username", "postgres")
-                .setProperty("hibernate.connection.password", "1234567890A12")
-                .setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
-                .setProperty("hibernate.show_sql", "true")
-                .setProperty("hibernate.hbm2ddl.auto", "update")
-                .addAnnotatedClass(Planet.class)
-                .buildSessionFactory();
 
         flywayMigration();
 
@@ -58,13 +46,6 @@ public class HibernateUtil {
     }
     public SessionFactory getSessionFactory(){
         return  this.sessionFactory;
-    }
-
-    public SessionFactory getSessionFactory1(){
-        return this.sessionFactory1;
-    }
-    public void closeSessionFactory1(){
-        sessionFactory1.close();
     }
     public void closeSessionFactory(){
         this.sessionFactory.close();

@@ -11,7 +11,7 @@ public class ClientCrudService {
 
     private Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 
-    public boolean create(Client client) {
+    public Client create(Client client) {
 
             Transaction transaction = session.beginTransaction();
 
@@ -19,21 +19,21 @@ public class ClientCrudService {
                 session.persist(client);
                 transaction.commit();
 
-                return true;
+                return client;
 
             }catch (Exception e){
                 e.printStackTrace();
                 transaction.rollback();
             }
 
-        return false;
+        return client;
     }
 
 
-    public boolean update(Client client) {
+    public Client update(Client client) {
 
         if (client == null){
-            return false;
+            throw new NullPointerException("Client == null");
         }
 
             Transaction transaction = session.beginTransaction();
@@ -42,7 +42,7 @@ public class ClientCrudService {
                 session.merge(client);
                 transaction.commit();
 
-                return true;
+                return client;
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -50,7 +50,7 @@ public class ClientCrudService {
             }
 
 
-        return false;
+        return client;
     }
 
 
